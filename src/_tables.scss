@@ -1,0 +1,5 @@
+@each $state, $value in $theme-colors {
+  $value: cssf-rgba(var(--#{$state}-r), var(--#{$state}-g), var(--#{$state}-b));
+
+  @include bscssf-table-variant($state, $value);
+}

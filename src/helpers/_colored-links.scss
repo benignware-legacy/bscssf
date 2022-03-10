@@ -1,0 +1,19 @@
+@each $name, $value in $theme-colors {
+  .link-#{$name} {
+    $link-color: cssf-rgba(var(--#{$name}-r), var(--#{$name}-g), var(--#{$name}-b));
+    color: $link-color;
+
+    $link-hover-color: bscssf-shift-color(
+      $link-color,
+      var(--link-shade-percentage, #{$link-shade-percentage / 100%})
+    );
+
+    &:hover {
+      color: cssf-rgba(
+        var(--link-hover-color-r, cssf-red($link-hover-color)),
+        var(--link-hover-color-g, cssf-green($link-hover-color)),
+        var(--link-hover-color-b, cssf-blue($link-hover-color))
+      );
+    }
+  }
+}

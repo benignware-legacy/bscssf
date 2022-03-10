@@ -1,0 +1,9 @@
+@mixin bscssf-alert-variant($background, $border, $color) {
+  color: $color;
+  @include gradient-bg($background);
+  border-color: $border;
+
+  .alert-link {
+    color: cssf-mix(#000000, $color, 20%);
+  }
+}

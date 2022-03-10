@@ -1,0 +1,136 @@
+@function bscssf-opaque($background, $foreground) {
+  @return cssf-mix(cssf-rgba($foreground, 1), $background, cssf-alpha($foreground));
+}
+
+// scss-docs-start table-variant
+@mixin bscssf-table-variant($state, $value) {
+  .table-#{$state} {
+    $background: $value;
+
+    @if ($state != 'light' and $state != 'dark') {
+      // $bg-scale: var(--table-bg-scale, $table-bg-scale / 100%);
+      // --table-#{$state}-bg-is-negative-weight: #{cssf-lt($bg-scale, 0)};
+      // --table-#{$state}-bg-mix: calc(#{cssf-if(var(--table-#{$state}-bg-is-negative-weight), 255, 0)});
+      
+      // $background: cssf-mix(
+      //   cssf-rgba(
+      //     var(--table-#{$state}-bg-mix),
+      //     var(--table-#{$state}-bg-mix),
+      //     var(--table-#{$state}-bg-mix),
+      //   ),
+      //   $value,
+      //   cssf-abs($bg-scale)
+      // );
+      $background: bscssf-shift-color(
+        $value,
+        var(--table-bg-scale, #{$table-bg-scale / 100%})
+      );
+    }
+
+    --table-#{$state}-bg-r: #{cssf-red($background)};
+    --table-#{$state}-bg-g: #{cssf-green($background)};
+    --table-#{$state}-bg-b: #{cssf-blue($background)};
+    --table-#{$state}-bg-a: #{cssf-alpha($background)};
+    $background: cssf-rgba(
+      var(--table-#{$state}-bg-r),
+      var(--table-#{$state}-bg-g),
+      var(--table-#{$state}-bg-b),
+      var(--table-#{$state}-bg-a)
+    );
+
+    // $opaque: bscssf-opaque($body-bg, $background);
+    // --opaque-#{$state}: $opaque;// --alpha: #{cssf-alpha($background)};
+
+    $color: cssf-contrast-color($background);
+    --table-#{$state}-color-r: #{cssf-red($color)};
+    --table-#{$state}-color-g: #{cssf-green($color)};
+    --table-#{$state}-color-b: #{cssf-blue($color)};
+    $color: cssf-rgba(
+      var(--table-#{$state}-color-r),
+      var(--table-#{$state}-color-g),
+      var(--table-#{$state}-color-b)
+    );
+
+    $border: cssf-mix($color, $background, var(--table-border-factor, $table-border-factor));
+    --table-#{$state}-border-r: #{cssf-red($border)};
+    --table-#{$state}-border-g: #{cssf-green($border)};
+    --table-#{$state}-border-b: #{cssf-blue($border)};
+    $border: cssf-rgba(
+      var(--table-#{$state}-border-r),
+      var(--table-#{$state}-border-g),
+      var(--table-#{$state}-border-b)
+    );
+
+    $striped-bg: cssf-mix($color, $background, var(--table-striped-bg-factor, $table-striped-bg-factor));
+    --table-#{$state}-striped-bg-r: #{cssf-red($striped-bg)};
+    --table-#{$state}-striped-bg-g: #{cssf-green($striped-bg)};
+    --table-#{$state}-striped-bg-b: #{cssf-blue($striped-bg)};
+    $striped-bg: cssf-rgba(
+      var(--table-#{$state}-striped-bg-r),
+      var(--table-#{$state}-striped-bg-g),
+      var(--table-#{$state}-striped-bg-b)
+    );
+
+    $striped-color: cssf-contrast-color($striped-bg);
+    --table-#{$state}-striped-color-r: #{cssf-red($striped-color)};
+    --table-#{$state}-striped-color-g: #{cssf-green($striped-color)};
+    --table-#{$state}-striped-color-b: #{cssf-blue($striped-color)};
+    $striped-color: cssf-rgba(
+      var(--table-#{$state}-striped-color-r),
+      var(--table-#{$state}-striped-color-g),
+      var(--table-#{$state}-striped-color-b)
+    );
+    
+    $active-bg: cssf-mix($color, $background, var(--table-active-bg-factor, $table-active-bg-factor));
+    --table-#{$state}-active-bg-r: #{cssf-red($active-bg)};
+    --table-#{$state}-active-bg-g: #{cssf-green($active-bg)};
+    --table-#{$state}-active-bg-b: #{cssf-blue($active-bg)};
+    $active-bg: cssf-rgba(
+      var(--table-#{$state}-active-bg-r),
+      var(--table-#{$state}-active-bg-g),
+      var(--table-#{$state}-active-bg-b)
+    );
+
+    $active-color: cssf-contrast-color($active-bg);
+    --table-#{$state}-active-color-r: #{cssf-red($active-color)};
+    --table-#{$state}-active-color-g: #{cssf-green($active-color)};
+    --table-#{$state}-active-color-b: #{cssf-blue($active-color)};
+    $active-color: cssf-rgba(
+      var(--table-#{$state}-active-color-r),
+      var(--table-#{$state}-active-color-g),
+      var(--table-#{$state}-active-color-b)
+    );
+
+    $hover-bg: cssf-mix($color, $background, var(--table-hover-bg-factor, $table-hover-bg-factor));
+    --table-#{$state}-hover-bg-r: #{cssf-red($hover-bg)};
+    --table-#{$state}-hover-bg-g: #{cssf-green($hover-bg)};
+    --table-#{$state}-hover-bg-b: #{cssf-blue($hover-bg)};
+    $hover-bg: cssf-rgba(
+      var(--table-#{$state}-hover-bg-r),
+      var(--table-#{$state}-hover-bg-g),
+      var(--table-#{$state}-hover-bg-b)
+    );
+
+    $hover-color: cssf-contrast-color($hover-bg);
+    --table-#{$state}-hover-color-r: #{cssf-red($hover-color)};
+    --table-#{$state}-hover-color-g: #{cssf-green($hover-color)};
+    --table-#{$state}-hover-color-b: #{cssf-blue($hover-color)};
+    $active-color: cssf-rgba(
+      var(--table-#{$state}-hover-color-r),
+      var(--table-#{$state}-hover-color-g),
+      var(--table-#{$state}-hover-color-b)
+    );
+
+    --#{$variable-prefix}table-bg: #{$background};
+    --#{$variable-prefix}table-striped-bg: #{$striped-bg};
+    --#{$variable-prefix}table-striped-color: #{$striped-color};
+    --#{$variable-prefix}table-active-bg: #{$active-bg};
+    --#{$variable-prefix}table-active-color: #{$active-color};
+    --#{$variable-prefix}table-hover-bg: #{$hover-bg};
+    --#{$variable-prefix}table-hover-color: #{$hover-color};
+
+    color: $color;
+    border-color: $border;
+  }
+}
+// scss-docs-end table-variant

@@ -1,0 +1,31 @@
+@each $name, $value in $theme-colors {
+  // TODO: min-contrast-ratio
+  $value: cssf-rgba(var(--#{$name}-r), var(--#{$name}-g), var(--#{$name}-b));
+  $list-group-item-scale: (
+    bg: var(--list-group-item-bg-scale, #{$list-group-item-bg-scale / 100%}),
+    color: var(--list-group-item-color-scale, #{$list-group-item-color-scale / 100%}),
+  );
+
+  .list-group-item-#{$name} {
+    @each $prop in ('bg', 'color') {
+      $prop-color: bscssf-shift-color($value, map-get($list-group-item-scale, $prop));
+      --list-group-item-#{$name}-#{$prop}-r: #{cssf-red($prop-color)};
+      --list-group-item-#{$name}-#{$prop}-g: #{cssf-green($prop-color)};
+      --list-group-item-#{$name}-#{$prop}-b: #{cssf-blue($prop-color)};
+    }
+  }
+
+  $background: rgba(
+    var(--list-group-item-#{$name}-bg-r),
+    var(--list-group-item-#{$name}-bg-g),
+    var(--list-group-item-#{$name}-bg-b)
+  );
+
+  $color: rgba(
+    var(--list-group-item-#{$name}-color-r),
+    var(--list-group-item-#{$name}-color-g),
+    var(--list-group-item-#{$name}-color-b)
+  );
+
+  @include bscssf-list-group-item-variant($name, $background, $color);
+}

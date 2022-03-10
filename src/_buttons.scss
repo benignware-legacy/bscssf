@@ -1,0 +1,174 @@
+@each $name, $value in $theme-colors {
+  $background: cssf-rgba(var(--#{$name}-r), var(--#{$name}-g), var(--#{$name}-b));
+  $border: $background;
+  $color: cssf-contrast-color($background);
+
+//   $btn-hover-bg-shade-amount:       15% !default;
+// $btn-hover-bg-tint-amount:        15% !default;
+// $btn-hover-border-shade-amount:   20% !default;
+// $btn-hover-border-tint-amount:    10% !default;
+// $btn-active-bg-shade-amount:      20% !default;
+// $btn-active-bg-tint-amount:       20% !default;
+// $btn-active-border-shade-amount:  25% !default;
+// $btn-active-border-tint-amount:   10% !default;
+
+  .btn-#{$name} {
+    @each $state, $props in (
+      hover: (
+        bg: (
+          var(--btn-hover-bg-shade-amount, #{$btn-hover-bg-shade-amount / 100%}),
+          var(--btn-hover-bg-tint-amount, #{$btn-hover-bg-tint-amount / 100%}),
+        ),
+        border: (
+          var(--btn-hover-border-shade-amount, #{$btn-hover-border-shade-amount / 100%}),
+          var(--btn-hover-border-tint-amount, #{$btn-hover-border-tint-amount / 100%}),
+        ),
+      ),
+      active: (
+        bg: (
+          var(--btn-active-bg-shade-amount, #{$btn-active-bg-shade-amount / 100%}),
+          var(--btn-active-bg-tint-amount, #{$btn-active-bg-tint-amount / 100%}),
+        ),
+        border: (
+          var(--btn-active-border-shade-amount, #{$btn-active-border-shade-amount / 100%}),
+          var(--btn-active-border-tint-amount, #{$btn-active-border-tint-amount / 100%}),
+        )
+      ),
+    ) {
+
+      @each $prop, $amounts in $props {
+        $shade-amount: nth($amounts, 1);
+        $tint-amount: nth($amounts, 2);
+
+        --btn-#{$name}-#{$state}-#{$prop}-is-light-contrast: calc(#{cssf-eq(cssf-red($color), cssf-red($color-contrast-light))});
+        // --btn-#{$name}-#{$state}-#{$prop}-is-light-contrast: 0;
+
+        $shaded: cssf-mix(black, $background, $shade-amount);
+        --btn-#{$name}-#{$state}-#{$prop}-shaded-r: #{cssf-red($shaded)};
+        --btn-#{$name}-#{$state}-#{$prop}-shaded-g: #{cssf-green($shaded)};
+        --btn-#{$name}-#{$state}-#{$prop}-shaded-b: #{cssf-blue($shaded)};
+
+        $tinted: cssf-mix(white, $background, $tint-amount);
+        --btn-#{$name}-#{$state}-#{$prop}-tinted-r: #{cssf-red($tinted)};
+        --btn-#{$name}-#{$state}-#{$prop}-tinted-g: #{cssf-green($tinted)};
+        --btn-#{$name}-#{$state}-#{$prop}-tinted-b: #{cssf-blue($tinted)};
+
+        $state-color: cssf-rgba(
+          calc(
+            cssf-ifelse(
+              var(--btn-#{$name}-#{$state}-#{$prop}-is-light-contrast),
+              var(--btn-#{$name}-#{$state}-#{$prop}-shaded-r),
+              var(--btn-#{$name}-#{$state}-#{$prop}-tinted-r)
+            )),
+          calc(
+            cssf-ifelse(
+              var(--btn-#{$name}-#{$state}-#{$prop}-is-light-contrast),
+              var(--btn-#{$name}-#{$state}-#{$prop}-shaded-g),
+              var(--btn-#{$name}-#{$state}-#{$prop}-tinted-g)
+            )
+          ),
+          calc(
+            cssf-ifelse(
+              var(--btn-#{$name}-#{$state}-#{$prop}-is-light-contrast),
+              var(--btn-#{$name}-#{$state}-#{$prop}-shaded-b),
+              var(--btn-#{$name}-#{$state}-#{$prop}-tinted-b)
+            )
+          )
+        );
+
+        --btn-#{$name}-#{$state}-#{$prop}-r: #{cssf-red($state-color)};
+        --btn-#{$name}-#{$state}-#{$prop}-g: #{cssf-green($state-color)};
+        --btn-#{$name}-#{$state}-#{$prop}-b: #{cssf-blue($state-color)};
+      }
+    }
+
+    $hover-background: cssf-rgba(
+      var(--btn-#{$name}-hover-bg-r),
+      var(--btn-#{$name}-hover-bg-g),
+      var(--btn-#{$name}-hover-bg-b),
+    );
+
+    $hover-border: cssf-rgba(
+      var(--btn-#{$name}-hover-border-r),
+      var(--btn-#{$name}-hover-border-g),
+      var(--btn-#{$name}-hover-border-b),
+    );
+
+    $hover-color: cssf-contrast-color($hover-background);
+
+    $active-background: cssf-rgba(
+      var(--btn-#{$name}-active-bg-r),
+      var(--btn-#{$name}-active-bg-g),
+      var(--btn-#{$name}-active-bg-b),
+    );
+
+    $active-border: cssf-rgba(
+      var(--btn-#{$name}-active-border-r),
+      var(--btn-#{$name}-active-border-g),
+      var(--btn-#{$name}-active-border-b),
+    );
+
+    $active-color: cssf-contrast-color($active-background);
+
+    @include sitekick-button-variant(
+      $background,
+      $border,
+      $color,
+      $hover-background: $hover-background,
+      $hover-border: $hover-border,
+      $hover-color: $hover-color,
+      $active-background: $active-background,
+      $active-border: $active-border,
+      $active-color: $active-color,
+      $disabled-background: $background,
+      $disabled-border: $border,
+      $disabled-color: $color,
+    )
+  }
+
+  .btn-outline-#{$name} {
+    @include sitekick-button-outline-variant(
+      $background,
+      $color-hover: $color,
+      $active-background: $background,
+      $active-border: $background,
+      $active-color: $color,
+    );
+  }
+}
+
+//
+// Link buttons
+//
+
+// Make a button look and behave like a link
+.btn-link {
+  $btn-link-color: cssf-rgba(
+    var(--btn-link-color-r, var(--link-color-r, var(--primary-r))),
+    var(--btn-link-color-g, var(--link-color-g, var(--primary-g))),
+    var(--btn-link-color-b, var(--link-color-b, var(--primary-b)))
+  );
+  color: $btn-link-color;
+
+  $btn-link-hover-color: bscssf-shift-color(
+    $btn-link-color,
+    var(--link-shade-percentage, #{$link-shade-percentage / 100%})
+  );
+
+  &:hover {
+    color: cssf-rgba(
+      var(--btn-link-hover-color-r, cssf-red($btn-link-hover-color)),
+      var(--btn-link-hover-color-g, cssf-green($btn-link-hover-color)),
+      var(--btn-link-hover-color-b, cssf-blue($btn-link-hover-color))
+    );
+  }
+
+  &:disabled,
+  &.disabled {
+    color: cssf-rgba(
+      var(--btn-link-disabled-color-r, cssf-red($btn-link-disabled-color)),
+      var(--btn-link-disabled-color-g, cssf-green($btn-link-disabled-color)),
+      var(--btn-link-disabled-color-b, cssf-blue($btn-link-disabled-color))
+    );
+  }
+}
