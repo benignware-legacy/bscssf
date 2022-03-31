@@ -15,22 +15,42 @@
   border-color: $pagination-border-color;
 
   &:hover {
-    color: $pagination-hover-color;
+    color: cssf-rgba(
+      var(--pagination-hover-color-r, cssf-red($pagination-hover-color)),
+      var(--pagination-hover-color-g, cssf-green($pagination-hover-color)),
+      var(--pagination-hover-color-b, cssf-blue($pagination-hover-color))
+    );
     background-color: $pagination-hover-bg;
     border-color: $pagination-hover-border-color;
   }
 
   &:focus {
-    color: $pagination-focus-color;
+    color: cssf-rgba(
+      var(--pagination-focus-color-r, var(--pagination-hover-color-r, cssf-red($pagination-hover-color))),
+      var(--pagination-focus-color-g, var(--pagination-hover-color-g, cssf-green($pagination-hover-color))),
+      var(--pagination-focus-color-b, var(--pagination-hover-color-b, cssf-blue($pagination-hover-color)))
+    );
     background-color: $pagination-focus-bg;
   }
 }
 
 .page-item {
+  $pagination-active-color: cssf-rgba(
+    var(--pagination-active-color-r, var(--component-active-color-r, 255)),
+    var(--pagination-active-color-g, var(--component-active-color-g, 255)),
+    var(--pagination-active-color-b, var(--component-active-color-b, 255)),
+  );
+  
   $pagination-active-bg: cssf-rgba(
     var(--pagination-active-bg-r, var(--component-active-bg-r, var(--primary-r))),
     var(--pagination-active-bg-g, var(--component-active-bg-g, var(--primary-g))),
     var(--pagination-active-bg-b, var(--component-active-bg-b, var(--primary-b)))
+  );
+
+  $pagination-active-border-color: cssf-rgba(
+    var(--pagination-active-border-color-r, var(--pagination-active-bg-r, var(--component-active-bg-r, var(--primary-r)))),
+    var(--pagination-active-border-color-g, var(--pagination-active-bg-g, var(--component-active-bg-g, var(--primary-g)))),
+    var(--pagination-active-border-color-b, var(--pagination-active-bg-b, var(--component-active-bg-b, var(--primary-b))))
   );
 
   &.active .page-link {

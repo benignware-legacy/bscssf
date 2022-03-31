@@ -1,0 +1,40 @@
+.nav-link {
+  $nav-link-color: cssf-rgba(
+    var(--nav-link-color-r, var(--link-color-r, var(--primary-r))),
+    var(--nav-link-color-g, var(--link-color-g, var(--primary-g))),
+    var(--nav-link-color-b, var(--link-color-b, var(--primary-b))),
+  );
+  color: $nav-link-color;
+
+  $nav-link-hover-color: bscssf-shift-color(
+    $nav-link-color,
+    var(--link-shade-percentage, #{$link-shade-percentage / 100%})
+  );
+
+  &:hover,
+  &:focus {
+    color: cssf-rgba(
+      cssf-red($nav-link-hover-color),
+      cssf-green($nav-link-hover-color),
+      cssf-blue($nav-link-hover-color)
+    );
+  }
+}
+
+.nav-pills {
+  .nav-link.active,
+  .show > .nav-link {
+    $nav-pills-link-active-color: cssf-rgba(
+      var(--nav-pills-active-color-r, var(--component-active-color-r, 255)),
+      var(--nav-pills-active-color-g, var(--component-active-color-g, 255)),
+      var(--nav-pills-active-color-b, var(--component-active-color-b, 255)),
+    );
+    $nav-pills-link-active-bg: cssf-rgba(
+      var(--nav-pills-active-bg-r, var(--component-active-bg-r, var(--primary-r))),
+      var(--nav-pills-active-bg-g, var(--component-active-bg-g, var(--primary-g))),
+      var(--nav-pills-active-bg-b, var(--component-active-bg-b, var(--primary-b))),
+    );
+    color: $nav-pills-link-active-color;
+    @include gradient-bg($nav-pills-link-active-bg);
+  }
+}

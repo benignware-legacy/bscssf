@@ -1,5 +1,18 @@
-@each $name, $value in $theme-colors {
-  $value: cssf-rgba(var(--#{$name}-r), var(--#{$name}-g), var(--#{$name}-b));
+@each $name, $value in map-merge(
+  $theme-colors,
+  (
+    'white': #fff
+  )
+) {
+  $value: cssf-rgba(
+    var(--#{$name}-r, #{cssf-red($value)}),
+    var(--#{$name}-g, #{cssf-green($value)}),
+    var(--#{$name}-b, #{cssf-blue($value)}),
+  );
+
+  .border-#{$name} {
+    border-color: $value !important;
+  }
 
   .bg-#{$name} {
     background: $value !important;

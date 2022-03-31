@@ -12,11 +12,12 @@ a {
     var(--link-shade-percentage, #{$link-shade-percentage / 100%})
   );
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: cssf-rgba(
-      cssf-red($link-hover-color),
-      cssf-green($link-hover-color),
-      cssf-blue($link-hover-color)
+      var(--link-hover-color-r, cssf-red($link-hover-color)),
+      var(--link-hover-color-g, cssf-green($link-hover-color)),
+      var(--link-hover-color-b, cssf-blue($link-hover-color))
     );
   }
 }
