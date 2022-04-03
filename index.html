@@ -11,6 +11,10 @@
         --primary-r: 255;
         --primary-g: 0;
         --primary-b: 255;
+
+        --border-color-r: 127.5;
+        --border-color-g: 0;
+        --border-color-b: 127.5;
       }
     </style>
     <div class="container">
@@ -200,7 +204,29 @@
         <div class="p-3 mb-2 bg-body text-auto">.bg-body</div>
         <div class="p-3 mb-2 bg-white text-auto">.bg-white</div>
         <div class="p-3 mb-2 bg-transparent text-auto">.bg-transparent</div>
-        <h3>Border color</h3>
+
+      </section>
+      <section class="my-4">
+        <h2>Borders</h2>
+        <h2>Border Color</h2>
+        <div class="row g-4">
+          <div class="col-md-3">
+            <div class="border" style="height: 0; padding-bottom: 100%;"> </div>
+          </div>
+          <div class="col-md-3">
+            <div class="border-top" style="height: 0; padding-bottom: 100%;"> </div>
+          </div>
+          <div class="col-md-3">
+            <div class="border-right" style="height: 0; padding-bottom: 100%;"> </div>
+          </div>
+          <div class="col-md-3">
+            <div class="border-bottom" style="height: 0; padding-bottom: 100%;"> </div>
+          </div>
+          <div class="col-md-3">
+            <div class="border-left" style="height: 0; padding-bottom: 100%;"> </div>
+          </div>
+        </div>
+        <h3>Contextual Borders</h3>
         <div class="row g-4">
           <div class="col-md-3">
             <div class="border border-primary" style="height: 0; padding-bottom: 100%;"> </div>
