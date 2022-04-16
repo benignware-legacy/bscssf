@@ -1,67 +1,120 @@
-.page-link {
-  $pagination-color: cssf-rgba(
-    var(--pagination-color-r, var(--link-color-r, var(--primary-r))),
-    var(--pagination-color-g, var(--link-color-g, var(--primary-g))),
-    var(--pagination-color-b, var(--link-color-b, var(--primary-b)))
-  );
+.page {
+  $pagination-dark-bg: $black;
+  $pagination-dark-border-color: $gray-700;
+  $pagination-dark-hover-bg: $gray-900;
+  $pagination-dark-hover-border-color: $gray-700;
 
-  $pagination-hover-color: bscssf-shift-color(
-    $pagination-color,
-    var(--link-shade-percentage, #{$link-shade-percentage / 100%})
-  );
+  $pagination-dark-disabled-bg: $gray-900;
+  $pagination-dark-disabled-border-color: $gray-700;
 
-  color: $pagination-color;
-  background-color: $pagination-bg;
-  border-color: $pagination-border-color;
-
-  &:hover {
-    color: cssf-rgba(
-      var(--pagination-hover-color-r, cssf-red($pagination-hover-color)),
-      var(--pagination-hover-color-g, cssf-green($pagination-hover-color)),
-      var(--pagination-hover-color-b, cssf-blue($pagination-hover-color))
+  &-item {
+    $pagination-active-color: cssf-rgba(
+      var(--pagination-active-color-r, var(--component-active-color-r, 255)),
+      var(--pagination-active-color-g, var(--component-active-color-g, 255)),
+      var(--pagination-active-color-b, var(--component-active-color-b, 255)),
     );
-    background-color: $pagination-hover-bg;
-    border-color: $pagination-hover-border-color;
-  }
-
-  &:focus {
-    color: cssf-rgba(
-      var(--pagination-focus-color-r, var(--pagination-hover-color-r, cssf-red($pagination-hover-color))),
-      var(--pagination-focus-color-g, var(--pagination-hover-color-g, cssf-green($pagination-hover-color))),
-      var(--pagination-focus-color-b, var(--pagination-hover-color-b, cssf-blue($pagination-hover-color)))
+    
+    $pagination-active-bg: cssf-rgba(
+      var(--pagination-active-bg-r, var(--component-active-bg-r, var(--primary-r))),
+      var(--pagination-active-bg-g, var(--component-active-bg-g, var(--primary-g))),
+      var(--pagination-active-bg-b, var(--component-active-bg-b, var(--primary-b)))
     );
-    background-color: $pagination-focus-bg;
-  }
-}
 
-.page-item {
-  $pagination-active-color: cssf-rgba(
-    var(--pagination-active-color-r, var(--component-active-color-r, 255)),
-    var(--pagination-active-color-g, var(--component-active-color-g, 255)),
-    var(--pagination-active-color-b, var(--component-active-color-b, 255)),
-  );
-  
-  $pagination-active-bg: cssf-rgba(
-    var(--pagination-active-bg-r, var(--component-active-bg-r, var(--primary-r))),
-    var(--pagination-active-bg-g, var(--component-active-bg-g, var(--primary-g))),
-    var(--pagination-active-bg-b, var(--component-active-bg-b, var(--primary-b)))
-  );
+    $pagination-active-border-color: cssf-rgba(
+      var(--pagination-active-border-color-r, var(--pagination-active-bg-r, var(--component-active-bg-r, var(--primary-r)))),
+      var(--pagination-active-border-color-g, var(--pagination-active-bg-g, var(--component-active-bg-g, var(--primary-g)))),
+      var(--pagination-active-border-color-b, var(--pagination-active-bg-b, var(--component-active-bg-b, var(--primary-b))))
+    );
 
-  $pagination-active-border-color: cssf-rgba(
-    var(--pagination-active-border-color-r, var(--pagination-active-bg-r, var(--component-active-bg-r, var(--primary-r)))),
-    var(--pagination-active-border-color-g, var(--pagination-active-bg-g, var(--component-active-bg-g, var(--primary-g)))),
-    var(--pagination-active-border-color-b, var(--pagination-active-bg-b, var(--component-active-bg-b, var(--primary-b))))
-  );
+    &.active .page-link {
+      color: $pagination-active-color;
+      background: $pagination-active-bg;
+      border-color: $pagination-active-border-color;
+    }
 
-  &.active .page-link {
-    color: $pagination-active-color;
-    background: $pagination-active-bg;
-    border-color: $pagination-active-border-color;
+    &.disabled .page-link {
+      color: $pagination-disabled-color;
+      background-color: $pagination-disabled-bg;
+      border-color: $pagination-disabled-border-color;
+
+      .pagination-dark & {
+        background-color: $pagination-dark-disabled-bg;
+        border-color: $pagination-dark-disabled-border-color;
+      }
+    }
   }
 
-  &.disabled .page-link {
-    color: $pagination-disabled-color;
-    background-color: $pagination-disabled-bg;
-    border-color: $pagination-disabled-border-color;
+  &-link {
+    $pagination-color: cssf-rgba(
+      var(--pagination-color-r, var(--link-color-r, var(--primary-r))),
+      var(--pagination-color-g, var(--link-color-g, var(--primary-g))),
+      var(--pagination-color-b, var(--link-color-b, var(--primary-b)))
+    );
+
+    $pagination-bg: cssf-rgba(
+      var(--pagination-bg-r, cssf-red($white)),
+      var(--pagination-bg-g, cssf-green($white)),
+      var(--pagination-bg-b, cssf-blue($white))
+    );
+
+    $pagination-border-color: cssf-rgba(
+      var(--pagination-bg-r, cssf-red($gray-300)),
+      var(--pagination-bg-g, cssf-green($gray-300)),
+      var(--pagination-bg-b, cssf-blue($gray-300))
+    );
+
+    $pagination-hover-color-default: bscssf-shift-color(
+      $pagination-color,
+      var(--link-shade-percentage, #{$link-shade-percentage / 100%})
+    );
+
+    $pagination-hover-color: cssf-rgba(
+      var(--pagination-hover-color-r, cssf-red($pagination-hover-color-default)),
+      var(--pagination-hover-color-g, cssf-green($pagination-hover-color-default)),
+      var(--pagination-hover-color-b, cssf-blue($pagination-hover-color-default))
+    );
+
+    $pagination-hover-bg: cssf-rgba(
+      var(--pagination-hover-bg-r, cssf-red($gray-200)),
+      var(--pagination-hover-bg-g, cssf-green($gray-200)),
+      var(--pagination-hover-bg-b, cssf-blue($gray-200))
+    );
+
+    $pagination-hover-border-color: cssf-rgba(
+      var(--pagination-hover-border-color-r, cssf-red($gray-300)),
+      var(--pagination-hover-border-color-g, cssf-green($gray-300)),
+      var(--pagination-hover-border-color-b, cssf-blue($gray-300))
+    );
+
+    color: $pagination-color;
+    background-color: $pagination-bg;
+    border-color: $pagination-border-color;
+
+    &:hover {
+      color: $pagination-hover-color;
+      background-color: $pagination-hover-bg;
+      border-color: $pagination-hover-border-color;
+    }
+
+    &:focus {
+      color: cssf-rgba(
+        var(--pagination-focus-color-r, var(--pagination-hover-color-r, cssf-red($pagination-hover-color))),
+        var(--pagination-focus-color-g, var(--pagination-hover-color-g, cssf-green($pagination-hover-color))),
+        var(--pagination-focus-color-b, var(--pagination-hover-color-b, cssf-blue($pagination-hover-color)))
+      );
+      background-color: $pagination-focus-bg;
+    }
+
+    .pagination-dark & {
+      background-color: $pagination-dark-bg;
+      border-color: $pagination-dark-border-color;
+
+      &:hover {
+        .page-item:not(.active) & {
+          background-color: $pagination-dark-hover-bg;
+          border-color: $pagination-dark-hover-border-color;
+        }
+      }
+    }
   }
 }
