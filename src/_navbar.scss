@@ -1,0 +1,13 @@
+.navbar {
+  &-light {
+    --nav-link-color-r: #{red($navbar-light-color)};
+    --nav-link-color-g: #{green($navbar-light-color)};
+    --nav-link-color-b: #{blue($navbar-light-color)};
+  }
+
+  &-dark {
+    --nav-link-color-r: #{red($navbar-dark-color)};
+    --nav-link-color-g: #{green($navbar-dark-color)};
+    --nav-link-color-b: #{blue($navbar-dark-color)};
+  }
+}

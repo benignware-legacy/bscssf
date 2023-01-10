@@ -4,4 +4,8 @@
     --#{$name}-g: #{green($color)};
     --#{$name}-b: #{blue($color)};
   }
+
+  --nav-link-color-r: var(--link-color-r);
+  --nav-link-color-g: var(--link-color-g);
+  --nav-link-color-b: var(--link-color-b);
 }
