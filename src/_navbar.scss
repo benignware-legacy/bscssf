@@ -1,10 +1,12 @@
 .navbar {
+  $navbar-light-color: if(type-of($navbar-light-color) != 'color' and type-of($emphasis-color) == 'color', $emphasis-color, $navbar-light-color);
+  
   &-light {
     --nav-link-color-r: #{red($navbar-light-color)};
     --nav-link-color-g: #{green($navbar-light-color)};
     --nav-link-color-b: #{blue($navbar-light-color)};
   }
-
+  
   &-dark {
     --nav-link-color-r: #{red($navbar-dark-color)};
     --nav-link-color-g: #{green($navbar-dark-color)};
