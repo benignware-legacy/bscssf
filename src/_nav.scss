@@ -1,4 +1,4 @@
-.nav-link {
+.nav-link:not(.navbar-nav .nav-link) {
   $nav-link-color: cssf-rgba(
     var(--nav-link-color-r, var(--link-color-r, var(--primary-r))),
     var(--nav-link-color-g, var(--link-color-g, var(--primary-g))),
