@@ -1,12 +1,12 @@
-@each $suffix in ('', '-top', '-right', '-bottom', '-left') {
-  .border#{$suffix} {
-    border#{$suffix}-color: cssf-rgba(
-      var(--border-color-r, #{cssf-red($border-color)}),
-      var(--border-color-g, #{cssf-green($border-color)}),
-      var(--border-color-b, #{cssf-blue($border-color)})
-    ) !important;
-  }
-}
+// @each $suffix in ('', '-top', '-right', '-bottom', '-left') {
+//   .border#{$suffix} {
+//     border#{$suffix}-color: cssf-rgba(
+//       var(--border-color-r, #{cssf-red($border-color)}),
+//       var(--border-color-g, #{cssf-green($border-color)}),
+//       var(--border-color-b, #{cssf-blue($border-color)})
+//     ) !important;
+//   }
+// }
 
 @each $name, $value in map-merge(
   $theme-colors,

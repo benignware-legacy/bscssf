@@ -1,6 +1,6 @@
 {
   "name": "bscssf",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "style": "dist/main.css",
   "sass": "src/bootstrap.scss",
