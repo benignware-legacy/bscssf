@@ -1,0 +1,48 @@
+/*
+@each $name, $value in $theme-colors {
+  // TODO: min-contrast-ratio
+  $value: cssf-rgba(var(--#{$name}-r), var(--#{$name}-g), var(--#{$name}-b));
+  $alert-scale: (
+    bg: var(--alert-bg-scale, $alert-bg-scale / 100%),
+    border: var(--alert-border-scale, $alert-border-scale / 100%),
+    color: var(--alert-color-scale, $alert-color-scale / 100%),
+  );
+
+  .alert-#{$name} {
+    @each $prop in ('bg', 'border', 'color') {
+      $prop-color: bscssf-shift-color($value, map-get($alert-scale, $prop));
+      --alert-#{$name}-#{$prop}-r: #{cssf-red($prop-color)};
+      --alert-#{$name}-#{$prop}-g: #{cssf-green($prop-color)};
+      --alert-#{$name}-#{$prop}-b: #{cssf-blue($prop-color)};
+    }
+
+    $background: rgba(
+      var(--alert-#{$name}-bg-r),
+      var(--alert-#{$name}-bg-g),
+      var(--alert-#{$name}-bg-b)
+    );
+
+    $border: rgba(
+      var(--alert-#{$name}-border-r),
+      var(--alert-#{$name}-border-g),
+      var(--alert-#{$name}-border-b)
+    );
+
+    $color: rgba(
+      var(--alert-#{$name}-color-r),
+      var(--alert-#{$name}-color-g),
+      var(--alert-#{$name}-color-b)
+    );
+
+    @include bscssf-alert-variant($background, $border, $color);
+  }
+}
+*/
+
+.alert {
+  &-link {
+    &:hover {
+      color: currentColor;
+    }
+  }
+}
