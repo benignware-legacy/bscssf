@@ -1,4 +1,4 @@
-.nav-link {
+.nav-link:not(.navbar-nav .nav-link) {
   $nav-link-color: cssf-rgba(
     var(--nav-link-color-r, var(--link-color-r, var(--primary-r))),
     var(--nav-link-color-g, var(--link-color-g, var(--primary-g))),
@@ -7,7 +7,6 @@
   --bs-nav-link-color: #{$nav-link-color};
 
   $contrast: cssf-contrast-color($nav-link-color);
-  // $nav-link-hover-color: cssf-mix($contrast, $nav-link-color, 0.5);
   
   $nav-link-hover-color: bscssf-shift-color(
     $nav-link-color,
