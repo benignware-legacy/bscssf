@@ -1,13 +1,19 @@
 :root {
+  /*
+  --body-bg-r: #{red($body-bg)};
+  --body-bg-g: #{green($body-bg)};
+  --body-bg-b: #{blue($body-bg)};
+  */
+
   @each $name, $color in $theme-colors {
     --#{$name}-r: #{red($color)};
     --#{$name}-g: #{green($color)};
     --#{$name}-b: #{blue($color)};
   }
 
+  /*
   --nav-link-color-r: var(--link-color-r);
   --nav-link-color-g: var(--link-color-g);
   --nav-link-color-b: var(--link-color-b);
+  */
 }
-
-

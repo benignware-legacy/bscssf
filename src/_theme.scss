@@ -1,0 +1,24 @@
+
+body, *[data-bs-theme="light"] {
+  @each $name, $color in $theme-colors {
+    $background: cssf-rgba(var(--#{$name}-r), var(--#{$name}-g), var(--#{$name}-b));
+    $bg-tinted: cssf-mix(white, $background, if($name == 'light', 0.3, 0.5));
+    $border-tinted: cssf-mix(white, $background, if($name == 'light', 0.1, 0.4));
+    $color: if($name == 'light', cssf-contrast-color($background), $background);
+    --bs-#{$name}-bg-subtle: #{$bg-tinted};
+    --bs-#{$name}-border-subtle: #{$border-tinted};
+    --bs-#{$name}-text: #{$color};
+  }
+}
+
+*[data-bs-theme="dark"] {
+  @each $name, $color in $theme-colors {
+    $background: cssf-rgba(var(--#{$name}-r), var(--#{$name}-g), var(--#{$name}-b));
+    $bg-shaded: cssf-mix(black, $background, if($name == 'dark', 0.3, 0.685));
+    $border-shaded: cssf-mix(black, $background, if($name == 'dark', -0.5, 0.2));
+    $color: if($name == 'dark', cssf-contrast-color($background), $background);
+    --bs-#{$name}-bg-subtle: #{$bg-shaded};
+    --bs-#{$name}-border-subtle: #{$border-shaded};
+    --bs-#{$name}-text: #{$color};
+  }
+}

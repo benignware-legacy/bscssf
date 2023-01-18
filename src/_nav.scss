@@ -1,24 +1,25 @@
-.nav-link:not(.navbar-nav .nav-link) {
+.nav-link {
   $nav-link-color: cssf-rgba(
     var(--nav-link-color-r, var(--link-color-r, var(--primary-r))),
     var(--nav-link-color-g, var(--link-color-g, var(--primary-g))),
     var(--nav-link-color-b, var(--link-color-b, var(--primary-b))),
   );
-  color: $nav-link-color;
+  --bs-nav-link-color: #{$nav-link-color};
 
+  $contrast: cssf-contrast-color($nav-link-color);
+  // $nav-link-hover-color: cssf-mix($contrast, $nav-link-color, 0.5);
+  
   $nav-link-hover-color: bscssf-shift-color(
     $nav-link-color,
     var(--link-shade-percentage, #{$link-shade-percentage / 100%})
   );
+  $nav-link-hover-color: cssf-rgba(
+    var(--nav-link-hover-color-r, cssf-red($nav-link-hover-color)),
+    var(--nav-link-hover-color-g, cssf-green($nav-link-hover-color)),
+    var(--nav-link-hover-color-b, cssf-blue($nav-link-hover-color))
+  );
 
-  &:hover,
-  &:focus {
-    color: cssf-rgba(
-      cssf-red($nav-link-hover-color),
-      cssf-green($nav-link-hover-color),
-      cssf-blue($nav-link-hover-color)
-    );
-  }
+  --bs-nav-link-hover-color: #{$nav-link-hover-color};
 }
 
 .nav-pills {

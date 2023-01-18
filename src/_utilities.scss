@@ -25,14 +25,21 @@
   }
 
   .bg-#{$name} {
-    background: $value !important;
+    // --bs-body-bg: #{$value};
+    // background: var(--bs-body-bg) !important;
+    background-color: #{cssf-rgba($value)} !important;
   }
 
   .text-#{$name} {
-    color: $value !important;
+    // --bs-body-color: #{$value};
+    // color: var(--bs-body-color) !important;
+    color: #{cssf-rgba($value)} !important;
   }
 
   .bg-#{$name}.text-auto {
-    color: cssf-contrast-color($value) !important;
+    $contrast: cssf-contrast-color($value);
+    // --bs-body-color: #{$contrast};
+    // color: var(--bs-body-color) !important;
+    color: #{cssf-rgba($contrast)} !important;
   }
 }

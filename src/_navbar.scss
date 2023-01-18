@@ -1,15 +1,80 @@
 .navbar {
-  $navbar-light-color: if(type-of($navbar-light-color) != 'color' and type-of($emphasis-color) == 'color', $emphasis-color, $navbar-light-color);
-  
-  &-light {
-    --nav-link-color-r: #{red($navbar-light-color)};
-    --nav-link-color-g: #{green($navbar-light-color)};
-    --nav-link-color-b: #{blue($navbar-light-color)};
+  &-brand {
+    color: var(--navbar-brand-color);
+
+    &:hover,
+    &:focus {
+      color: var(--navbar-brand-color);
+    }
   }
-  
-  &-dark {
-    --nav-link-color-r: #{red($navbar-dark-color)};
-    --nav-link-color-g: #{green($navbar-dark-color)};
-    --nav-link-color-b: #{blue($navbar-dark-color)};
+
+  &-nav .nav-link.active,
+  &-nav .show > .nav-link {
+    color: var(--navbar-active-color);
+  }
+
+  $navbar-light-color: if(type-of($emphasis-color) == 'color', $emphasis-color, $navbar-light-color);
+  $navbar-dark-color: if(type-of($emphasis-color-dark) == 'color', $emphasis-color-dark, $navbar-dark-color);
+
+  @debug($navbar-dark-color);
+
+  $navbar-light-color-tinted: cssf-mix(white, $navbar-light-color, 0.5);
+  $r: cssf-red($navbar-light-color-tinted);
+  $g: cssf-green($navbar-light-color-tinted);
+  $b: cssf-blue($navbar-light-color-tinted);
+  --nav-link-color-r: #{$r};
+  --nav-link-color-g: #{$g};
+  --nav-link-color-b: #{$b};
+
+  [data-bs-theme="dark"] & {
+    --navbar-brand-color: #{$navbar-dark-color};
+    --navbar-active-color: #{$navbar-dark-color};
+    $navbar-dark-color-shaded: cssf-mix(black, $navbar-dark-color, 0.5);
+    $r: cssf-red($navbar-dark-color-shaded);
+    $g: cssf-green($navbar-dark-color-shaded);
+    $b: cssf-blue($navbar-dark-color-shaded);
+    $r: cssf-red($navbar-dark-color);
+    $g: cssf-green($navbar-dark-color);
+    $b: cssf-blue($navbar-dark-color);
+    --nav-link-color-r: #{$r};
+    --nav-link-color-g: #{$g};
+    --nav-link-color-b: #{$b};
+  }
+
+  @each $name, $value in (
+    light: $navbar-light-color,
+    dark: $navbar-dark-color
+   ) {
+    &-#{$name} {
+      $r: cssf-red($value);
+      $g: cssf-green($value);
+      $b: cssf-blue($value);
+      --nav-link-color-r: #{$r};
+      --nav-link-color-g: #{$g};
+      --nav-link-color-b: #{$b};
+      --navbar-brand-color: rgb(#{$r}, #{$g}, #{$b});
+      --navbar-active-color: rgb(#{$r}, #{$g}, #{$b});
+      // --bs-nav-link-color: #{$value};
+    }
+  }
+
+  @each $name, $value in $theme-colors {
+    &-auto.bg-#{$name} {
+      $color: cssf-rgba(var(--#{$name}-r), var(--#{$name}-g), var(--#{$name}-b));
+      $contrast: cssf-contrast-color($color);
+      $shifted: cssf-mix($contrast, $color, 0.75);
+      $hover: bscssf-shift-color(
+        $shifted,
+        var(--link-shade-percentage, #{$link-shade-percentage / 100%})
+      );
+      --nav-link-color-r: #{cssf-red($shifted)};
+      --nav-link-color-g: #{cssf-green($shifted)};
+      --nav-link-color-b: #{cssf-blue($shifted)};
+      --nav-link-hover-color-r: #{cssf-red($hover)};
+      --nav-link-hover-color-g: #{cssf-green($hover)};
+      --nav-link-hover-color-b: #{cssf-blue($hover)};
+      --navbar-brand-color: #{$contrast};
+      --navbar-active-color: #{$contrast};
+    }
   }
 }
