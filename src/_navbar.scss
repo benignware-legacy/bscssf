@@ -13,8 +13,8 @@
   //   color: var(--navbar-active-color);
   // }
 
-  $navbar-light-color: if(type-of($emphasis-color) == 'color', $emphasis-color, $navbar-light-color);
-  $navbar-dark-color: if(type-of($emphasis-color-dark) == 'color', $emphasis-color-dark, $navbar-dark-color);
+  $navbar-light-color: if(variable-exists(emphasis-color), $emphasis-color, $navbar-light-color);
+  $navbar-dark-color: if(variable-exists(emphasis-color-dark), $emphasis-color-dark, $navbar-dark-color);
 
   @debug($navbar-dark-color);
 
@@ -83,8 +83,9 @@
   }
 
   &:not([class*="bg-"]) {
-    $color: cssf-rgba(var(--bs-navbar-bg-r), var(--bs-navbar-bg-g), var(--bs-navbar-bg-b));
-    background-color: $color;
+    $color: cssf-rgba(var(--bs-navbar-bg-r), var(--bs-navbar-bg-g), var(--bs-navbar-bg-b), 1);
+    $color-rgba: cssf-rgba(var(--bs-navbar-bg-r), var(--bs-navbar-bg-g), var(--bs-navbar-bg-b), var(--bs-navbar-bg-a, 1));
+    background-color: $color-rgba;
     $contrast: cssf-contrast-color($color);
     $shifted: cssf-mix($contrast, $color, 0.75);
     $hover: bscssf-shift-color(
