@@ -1,9 +1,9 @@
 {
   "name": "bscssf",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "",
   "style": "dist/main.css",
-  "sass": "src/bootstrap.scss",
+  "sass": "src/v1/index.scss",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack build",

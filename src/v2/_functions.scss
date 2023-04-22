@@ -1,0 +1,31 @@
+@function bscssf-shade-color($color, $weight: 0.5) {
+  @return cssf-mix(
+    $color-contrast-dark,
+    $color,
+    $weight
+  );
+}
+
+@function bscssf-tint-color($color, $weight: 0.5) {
+  @return cssf-mix(
+    $color-contrast-light,
+    $color,
+    $weight
+  );
+}
+
+@function bscssf-shift-color($color, $weight: 0.5) {
+  $abs: max($weight, -1 * $weight);
+  $mix: calc(
+    (1 - clamp(
+      0,
+      $weight / $abs,
+      1
+    )) * 255
+  );
+  @return cssf-mix(
+    cssf-rgba($mix, $mix, $mix),
+    $color,
+    $abs
+  );
+}

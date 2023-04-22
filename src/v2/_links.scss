@@ -1,0 +1,19 @@
+// Links
+a {
+  $link-color: cssf-rgba(
+    var(--bs-link-color-r, var(--bs-primary-r)),
+    var(--bs-link-color-g, var(--bs-primary-g)),
+    var(--bs-link-color-b, var(--bs-primary-b))
+  );
+  color: $link-color;
+
+  $link-hover-color: bscssf-shift-color(
+    $link-color,
+    $link-shade-percentage / 100%
+  );
+
+  &:hover,
+  &:focus {
+    color: $link-hover-color;
+  }
+}

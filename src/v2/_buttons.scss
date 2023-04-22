@@ -1,0 +1,122 @@
+%btn-solid {
+  $btn-bg: cssf-rgba(var(--bs-btn-bg-r), var(--bs-btn-bg-g), var(--bs-btn-bg-b));
+  --bs-btn-bg: #{$btn-bg};
+  $btn-color: cssf-contrast-color($btn-bg);
+  --bs-btn-color: #{$btn-color};
+  --bs-btn-bg-is-contrast-light: calc(#{cssf-eq(cssf-red($btn-color), cssf-red(#000000))});
+  --bs-btn-border-color: #{$btn-bg};
+  --bs-btn-disabled-bg: #{$btn-bg};
+  --bs-btn-disabled-border-color: #{$btn-bg};
+
+  $states: (
+    'hover': (
+      (
+        prop: 'bg',
+        shade-amount: $btn-hover-bg-shade-amount,
+        tint-amount: $btn-hover-bg-tint-amount
+      ),
+      (
+        prop: 'border-color',
+        shade-amount: $btn-hover-border-shade-amount,
+        tint-amount: $btn-hover-border-tint-amount
+      )
+    ),
+    'active': (
+      (
+        prop: 'bg',
+        shade-amount: $btn-active-bg-shade-amount,
+        tint-amount: $btn-active-bg-tint-amount
+      ),
+      (
+        prop: 'border-color',
+        shade-amount: $btn-active-bg-shade-amount,
+        tint-amount: $btn-active-bg-tint-amount
+      )
+    )
+  );
+
+  @each $state, $styles in $states {
+    @each $style in $styles {
+      $prop: map-get($style, 'prop');
+      $shade-amount: map-get($style, 'shade-amount');
+      $tint-amount: map-get($style, 'tint-amount');
+      $shaded: cssf-mix(#000000, $btn-bg, #{$shade-amount / 100% * -1});
+      --bs-btn-#{$state}-#{$prop}-shaded-r: #{cssf-red($shaded)};
+      --bs-btn-#{$state}-#{$prop}-shaded-g: #{cssf-green($shaded)};
+      --bs-btn-#{$state}-#{$prop}-shaded-b: #{cssf-blue($shaded)};
+      $tinted: cssf-mix(#ffffff, $btn-bg, #{$tint-amount / 100%});
+      --bs-btn-#{$state}-#{$prop}-tinted-r: #{cssf-red($tinted)};
+      --bs-btn-#{$state}-#{$prop}-tinted-g: #{cssf-green($tinted)};
+      --bs-btn-#{$state}-#{$prop}-tinted-b: #{cssf-blue($tinted)};
+      $color: cssf-rgba(
+        calc(
+          cssf-ifelse(
+            var(--bs-btn-bg-is-contrast-light),
+            var(--bs-btn-#{$state}-#{$prop}-shaded-r),
+            var(--bs-btn-#{$state}-#{$prop}-tinted-r)
+          )),
+        calc(
+          cssf-ifelse(
+            var(--bs-btn-bg-is-contrast-light),
+            var(--bs-btn-#{$state}-#{$prop}-shaded-g),
+            var(--bs-btn-#{$state}-#{$prop}-tinted-g)
+          )
+        ),
+        calc(
+          cssf-ifelse(
+            var(--bs-btn-bg-is-contrast-light),
+            var(--bs-btn-#{$state}-#{$prop}-shaded-b),
+            var(--bs-btn-#{$state}-#{$prop}-tinted-b)
+          )
+        )
+      );
+      --bs-btn-#{$state}-#{$prop}: #{$color};
+
+      @if $prop == 'bg' {
+        $btn-color: cssf-contrast-color($color);
+        --bs-btn-#{$state}-color: #{$btn-color};
+      }
+    }
+  }
+  $btn-focus-shadow-color: cssf-mix(cssf-contrast-color($btn-bg), $btn-color, 0.15);
+  --bs-btn-focus-shadow-rgb: #{cssf-red($btn-focus-shadow-color)} #{cssf-green($btn-focus-shadow-color)} #{cssf-blue($btn-focus-shadow-color)};
+}
+
+%btn-outline {
+  --bs-btn-bg: transparent;
+  $btn-color: cssf-rgba(var(--bs-btn-color-r), var(--bs-btn-color-g), var(--bs-btn-color-b));
+  --bs-btn-color: #{$btn-color};
+  --bs-btn-border-color: #{$btn-color};
+  --bs-btn-hover-bg: #{$btn-color};
+  --bs-btn-hover-border-color: #{$btn-color};
+  $btn-hover-color: cssf-contrast-color($btn-color);
+  --bs-btn-hover-color: #{$btn-hover-color};
+  --bs-btn-active-bg: #{$btn-color};
+  --bs-btn-active-border-color: #{$btn-color};
+  $btn-active-color: cssf-contrast-color($btn-color);
+  --bs-btn-active-color: #{$btn-active-color};
+}
+
+@each $name, $value in $theme-colors {
+  .btn-#{$name} {
+    --bs-btn-bg-r: var(--bs-#{$name}-r);
+    --bs-btn-bg-g: var(--bs-#{$name}-g);
+    --bs-btn-bg-b: var(--bs-#{$name}-b);
+  }
+}
+
+.btn {
+  @extend %btn-solid;
+}
+
+.btn[class*='btn-outline'] {
+  @extend %btn-outline;
+}
+
+@each $name, $value in $theme-colors {
+  .btn-outline-#{$name} {
+    --bs-btn-color-r: var(--bs-#{$name}-r);
+    --bs-btn-color-g: var(--bs-#{$name}-g);
+    --bs-btn-color-b: var(--bs-#{$name}-b);
+  }
+}

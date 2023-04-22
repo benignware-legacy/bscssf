@@ -3,10 +3,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const scssf = require('cssf/int/sass');
 
+const VERSION = 1;
+
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
   entry: [
-    path.resolve(__dirname, 'src/bootstrap.scss')
+    path.resolve(__dirname, `src/v${VERSION}/index.scss`)
   ],
   output: {
     path: path.join(__dirname, 'dist'),
